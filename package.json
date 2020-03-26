@@ -47,6 +47,7 @@
   ],
   "dependencies": {
     "prop-types": "^15.6.2",
+    "react-image-crop": "^8.5.0",
     "react-modal": "^3.11.1"
   },
   "peerDependencies": {

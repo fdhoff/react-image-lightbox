@@ -26,6 +26,8 @@ import {
   MIN_SWIPE_DISTANCE,
 } from './constant';
 import './style.css';
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 
 class ReactImageLightbox extends Component {
   static isTargetMatchImage(target) {
@@ -84,6 +86,8 @@ class ReactImageLightbox extends Component {
       // Lightbox is closing
       // When Lightbox is mounted, if animation is enabled it will open with the reverse of the closing animation
       isClosing: !props.animationDisabled,
+
+      crop: {},
 
       // Component parts should animate (e.g., when images are moving, or image is being zoomed)
       shouldAnimate: false,
@@ -1388,20 +1392,7 @@ class ReactImageLightbox extends Component {
         );
       } else {
         images.push(
-          <img
-            {...(imageCrossOrigin ? { crossOrigin: imageCrossOrigin } : {})}
-            className={`${imageClass} ril__image`}
-            onDoubleClick={this.handleImageDoubleClick}
-            onWheel={this.handleImageMouseWheel}
-            onDragStart={e => e.preventDefault()}
-            style={imageStyle}
-            src={imageSrc}
-            key={imageSrc + keyEndings[srcType]}
-            alt={
-              typeof imageTitle === 'string' ? imageTitle : translate('Image')
-            }
-            draggable={false}
-          />
+          <ReactCrop src={imageSrc} crop={this.state.crop} onChange={crop => this.setState({crop})}
         );
       }
     };
